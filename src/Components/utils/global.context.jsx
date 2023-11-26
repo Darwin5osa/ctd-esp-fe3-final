@@ -1,35 +1,32 @@
-import axios from 'axios';
-import { createContext, useContext, useEffect, useReducer } from 'react';
+import axios from "axios";
+import { createContext, useContext, useEffect, useReducer } from "react";
 
-const initialState = {theme: "light", dentistList: [], favs: [], dentistSelected: {}}
+const initialState = { theme: "light", dentistList: [], dentistSelected: {} };
 
 const ContextGlobal = createContext();
 
 const reducer = (state, action) => {
-  switch(action.type){
-    case 'GET_DENTISTS':
-      return {...state, dentistList: action.payload}
-    case 'GET_DENTIST':
-      return {...state, dentistSelected: action.payload } //completar
-    case 'ADD_FAV': 
-      return {...state, favs: [...state.favs, action.payload]}
-    case 'DELETE_FAVS':
-      return {...state, favs: action.payload}
-    case 'TURN_LIGHT_THEME':
-      return {...state, theme: "light"}
-    case 'TURN_DARK_THEME':
-      return {...state, theme: "dark"}
+  switch (action.type) {
+    case "GET_DENTISTS":
+      return { ...state, dentistList: action.payload };
+    case "GET_DENTIST":
+      return { ...state, dentistSelected: action.payload }; //completar
+    case "TURN_LIGHT_THEME":
+      return { ...state, theme: "light" };
+    case "TURN_DARK_THEME":
+      return { ...state, theme: "dark" };
   }
-}
+};
 
 export const ContextProvider = ({ children }) => {
   const url = "https://jsonplaceholder.typicode.com/users";
-  const [state, dispatch] = useReducer(reducer, initialState)
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    axios(url)
-    .then(response => dispatch({type: 'GET_DENTISTS', payload: response.data}))
-  },[])
+    axios(url).then((response) =>
+      dispatch({ type: "GET_DENTISTS", payload: response.data })
+    );
+  }, []);
 
   return (
     <ContextGlobal.Provider value={{ state, dispatch }}>
@@ -38,6 +35,6 @@ export const ContextProvider = ({ children }) => {
   );
 };
 
-export default ContextProvider
+export default ContextProvider;
 
-export const useDentistStates = () => useContext(ContextGlobal)
+export const useDentistStates = () => useContext(ContextGlobal);

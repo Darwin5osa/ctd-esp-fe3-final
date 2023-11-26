@@ -1,12 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-
 const Card = ({ dentist }) => {
+  const [isFavorite, setIsFavorite] = useState(false);
 
-  const addFav = ()=>{
-    // Aqui iria la logica para agregar la Card en el localStorage
-  }
+  useEffect(() => {
+    const favoritesListString = localStorage.getItem('favs');
+    const favoritesList = favoritesListString ? JSON.parse(favoritesListString) : [];
+    const isDentistInFavorites = favoritesList.some((favDentist) => favDentist.id === dentist.id);
+    setIsFavorite(isDentistInFavorites);
+  }, [dentist.id]);
+
+  const handleFavoriteDentist = () => {
+    const favoritesListString = localStorage.getItem('favs');
+    const favoritesList = favoritesListString ? JSON.parse(favoritesListString) : [];
+
+    const isDentistInFavorites = favoritesList.some((favDentist) => favDentist.id === dentist.id);
+
+    const updatedFavoritesList = isDentistInFavorites
+      ? favoritesList.filter((favDentist) => favDentist.id !== dentist.id)
+      : [...favoritesList, dentist];
+
+    localStorage.setItem('favs', JSON.stringify(updatedFavoritesList));
+    setIsFavorite(!isDentistInFavorites);
+  };
 
   return (
     <div className="card">
@@ -15,8 +32,11 @@ const Card = ({ dentist }) => {
         </Link>
         <h4>{dentist.username} - ID: {dentist.id}</h4>
 
-        {/* Ademas deberan integrar la logica para guardar cada Card en el localStorage */}
-        <button onClick={addFav} className="favButton">Add fav ⭐</button>
+        <button onClick={handleFavoriteDentist} className="favButton">
+          {isFavorite
+            ? 'Remove fav ❌'
+            : 'Add fav ⭐'}
+        </button>
     </div>
   );
 };
