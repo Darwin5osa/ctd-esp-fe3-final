@@ -6,24 +6,16 @@ const Card = ({ dentist }) => {
 
   useEffect(() => {
     const favoritesListString = localStorage.getItem("favs");
-    const favoritesList = favoritesListString
-      ? JSON.parse(favoritesListString)
-      : [];
-    const isDentistInFavorites = favoritesList.some(
-      (favDentist) => favDentist.id === dentist.id
-    );
+    const favoritesList = favoritesListString ? JSON.parse(favoritesListString) : [];
+    const isDentistInFavorites = favoritesList.some((favDentist) => favDentist.id === dentist.id);
     setIsFavorite(isDentistInFavorites);
   }, [dentist.id]);
 
   const handleFavoriteDentist = () => {
     const favoritesListString = localStorage.getItem("favs");
-    const favoritesList = favoritesListString
-      ? JSON.parse(favoritesListString)
-      : [];
+    const favoritesList = favoritesListString ? JSON.parse(favoritesListString) : [];
 
-    const isDentistInFavorites = favoritesList.some(
-      (favDentist) => favDentist.id === dentist.id
-    );
+    const isDentistInFavorites = favoritesList.some((favDentist) => favDentist.id === dentist.id);
 
     const updatedFavoritesList = isDentistInFavorites
       ? favoritesList.filter((favDentist) => favDentist.id !== dentist.id)

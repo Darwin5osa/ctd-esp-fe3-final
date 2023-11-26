@@ -11,13 +11,10 @@ const Favs = () => {
       setDentistList([...favoritesList]);
     };
 
-    // Suscribirse al evento personalizado 'favoritesChanged'
     window.addEventListener('favoritesChanged', updateDentistList);
 
-    // Obtener la lista de favoritos al montar el componente
     updateDentistList();
 
-    // Limpiar el event listener cuando el componente se desmonta
     return () => {
       window.removeEventListener('favoritesChanged', updateDentistList);
     };
