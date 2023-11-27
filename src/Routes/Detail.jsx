@@ -19,7 +19,7 @@ const Detail = () => {
       dispatch({ type: "GET_DENTIST", payload: response.data })
     })
   
-  })
+  }, [])
 
   return (
     <>
