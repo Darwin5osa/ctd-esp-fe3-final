@@ -148,7 +148,9 @@ tr:nth-child(even) {
 .dark{
   background-color: #12121296;
   color: white;
+  height: 100%;
 }
+
 
 .dark nav, .dark footer{
   background-color: #0000006c;
@@ -208,6 +210,4 @@ background-color: #4d4a4a;
   font-weight: bold;
 }
 
-.dark .contact, .dark .favs{
-  height: 40vw;
-}
+
