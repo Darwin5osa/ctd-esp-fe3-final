@@ -27,12 +27,13 @@ const Form = () => {
   return (
     <div>
         {!show && 
-            <form onSubmit={handleSumbit} style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+            <form onSubmit={handleSumbit}>
                 <label>Full name</label>
                 <input type="text" value={userData.nombre} onChange={(event) => setUserData({...userData, name: event.target.value})}/>
                 <label>Email</label>
                 <input type="text" value={userData.email} onChange={(event) => setUserData({...userData, email: event.target.value})}/>
                 <button>Send</button>
+                <br/>
             </form>}
         {show && <Alert severity="success">Gracias {userData.name} te contactaremos cuanto antes vía mail</Alert>}
         {error && <Alert severity="error">Por favor verifique su información nuevamente</Alert>}
