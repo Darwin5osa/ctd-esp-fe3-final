@@ -3,8 +3,9 @@ import { createContext, useContext, useEffect, useReducer } from "react";
 import { reducer } from "./Reducer";
 
 const initialState = { 
-  theme: "light", 
+  theme: false, 
   dentistList: [], 
+  dentistSelected: 0,
   favs: JSON.parse(localStorage.getItem('favs')) || [] 
 };
 
