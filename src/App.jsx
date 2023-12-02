@@ -5,17 +5,20 @@ import Favs from './Routes/Favs';
 import Contact from './Routes/Contact';
 import Home from './Routes/Home';
 import Detail from './Routes/Detail';
-//className="App", la cambie para probar los estilos darks, creo que podría ser facil cambiar desde aca la clase según el theme
+import { useDentistStates } from './Components/utils/global.context'
+
 function App() {
+  const {state} = useDentistStates()
+  console.log(state);
+
   return (
-      <div className="dark">
+      <div className={/*state.theme ? "dark" :*/ "light" }>
           <Navbar/>
           <Routes>
             <Route path='/' element={<Home/>}/>
             <Route path='/contact' element={<Contact/>}/>
             <Route path='/favs' element={<Favs/>}/>
             <Route path='/detail/:id' element={<Detail />} />
-            {/*<Route path='*' element={<PageNotFound/>}/>*/}
           </Routes>
           <Footer/>
       </div>
