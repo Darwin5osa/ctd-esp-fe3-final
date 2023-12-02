@@ -9,10 +9,9 @@ import { useDentistStates } from './Components/utils/global.context'
 
 function App() {
   const {state} = useDentistStates()
-  console.log(state);
 
   return (
-      <div className={/*state.theme ? "dark" :*/ "light" }>
+      <div className={state.theme ? "dark" : "light" }>
           <Navbar/>
           <Routes>
             <Route path='/' element={<Home/>}/>
