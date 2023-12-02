@@ -4,8 +4,7 @@ import { useDentistStates } from './utils/global.context'
 
 const Navbar = () => {
   const {dispatch} = useDentistStates()
-  const a =  () =>  {console.log("Este mensaje solo se debe mostrar al clickear change theme")
-  }
+
   return (
     <nav>
       <Link to='/'><h4>Home</h4></Link>

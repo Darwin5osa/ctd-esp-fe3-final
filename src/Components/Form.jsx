@@ -10,7 +10,6 @@ const Form = () => {
   const [show, setShow] = useState(false)
   const [error, setError] = useState(false)
 
-
   const handleSumbit = (event) => {
     event.preventDefault()
     const regex = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
@@ -23,7 +22,6 @@ const Form = () => {
     } 
   }
 
-  
   return (
     <div>
         {!show && 
