@@ -1,22 +1,14 @@
 import axios from "axios";
 import { createContext, useContext, useEffect, useReducer } from "react";
+import { reducer } from "./Reducer";
 
-const initialState = { theme: "light", dentistList: [], dentistSelected: {} };
+const initialState = { 
+  theme: "light", 
+  dentistList: [], 
+  favs: JSON.parse(localStorage.getItem('favs')) || [] 
+};
 
 const ContextGlobal = createContext();
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "GET_DENTISTS":
-      return { ...state, dentistList: action.payload };
-    case "GET_DENTIST":
-      return { ...state, dentistSelected: action.payload }; //completar
-    case "TURN_LIGHT_THEME":
-      return { ...state, theme: "light" };
-    case "TURN_DARK_THEME":
-      return { ...state, theme: "dark" };
-  }
-};
 
 export const ContextProvider = ({ children }) => {
   const url = "https://jsonplaceholder.typicode.com/users";
@@ -27,6 +19,10 @@ export const ContextProvider = ({ children }) => {
       dispatch({ type: "GET_DENTISTS", payload: response.data })
     );
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem('favs', JSON.stringify(state.favs))
+  }, [state.favs])
 
   return (
     <ContextGlobal.Provider value={{ state, dispatch }}>

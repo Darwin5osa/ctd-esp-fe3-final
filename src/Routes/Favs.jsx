@@ -1,24 +1,16 @@
 import React, { useEffect, useState } from "react";
 import Card from "../Components/Card";
+import { useDentistStates } from '../Components/utils/global.context'
 
 const Favs = () => {
   const [dentistList, setDentistList] = useState([]);
+  const {state} = useDentistStates()
 
   useEffect(() => {
-    const updateDentistList = () => {
       const favoritesListString = localStorage.getItem('favs');
       const favoritesList = favoritesListString ? JSON.parse(favoritesListString) : [];
       setDentistList([...favoritesList]);
-    };
-
-    window.addEventListener('favoritesChanged', updateDentistList);
-
-    updateDentistList();
-
-    return () => {
-      window.removeEventListener('favoritesChanged', updateDentistList);
-    };
-  }, []);
+  }, [state.favs]);
 
   return (
     <>
