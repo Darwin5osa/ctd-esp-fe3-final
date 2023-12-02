@@ -10,5 +10,7 @@ export const reducer = (state, action) => {
         return {...state, favs: [...state.favs, action.payload]};
       case "DELETE_FAV":
         return {...state, favs: state.favs.filter((favDentist) => favDentist.id !== action.payload.id)};
+      default:
+        return alert("Metodo no existe")
     }
   };
